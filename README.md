@@ -43,14 +43,6 @@ Repositorio del grupo X para el proyecto del ramo *Proyecto Inicial (IWG400)* �
     - Jumpers
     - Protoboard
     - Bomba de Agua Sumergible Pequeña
----
-
-## 🚀 Instrucciones de Instalacion y Uso
-
-
-1. **Clonar el repositorio:** `git clone ...`
-2. **Dependencias:** Listar qué librerías necesitan (ej: `pip install -r requirements.txt` o librerías de Arduino).
-3. **Ejecución:** Cómo se corre el código principal.
 
 ---
 
