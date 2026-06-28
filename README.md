@@ -55,7 +55,7 @@ Repositorio del grupo X para el proyecto del ramo *Proyecto Inicial (IWG400)* �
 ---
 
 ## 📐 Diseño del Sistema
-![Diagrama de Conexiones](https://imgur.com/a/conexiones-sCZNOZ8)
+[Diagrama de Conexiones](https://imgur.com/a/conexiones-sCZNOZ8)
 
 *Explicacion grafica de como es la conexion entre el microcontrolador y los sensores*
 
