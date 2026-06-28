@@ -1,1 +1,85 @@
 
+const int PIN_SENSOR = A0;
+const int PIN_RELAY  = 7;
+
+bool pumpOn   = false;
+bool autoMode = false;
+int  thrMin   = 40;
+int  thrMax   = 70;
+
+unsigned long lastReport = 0;
+
+void setup() {
+  Serial1.begin(115200);
+  Serial.begin(115200);
+  pinMode(PIN_RELAY, OUTPUT);
+  digitalWrite(PIN_RELAY, HIGH);
+  delay(500);
+}
+
+void loop() {
+  if (Serial1.available()) {
+    String cmd = Serial1.readStringUntil('\n');
+    cmd.trim();
+    if (cmd.length() > 0) handleCommand(cmd);
+  }
+
+  if (Serial.available()) {
+    String cmd = Serial.readStringUntil('\n');
+    cmd.trim();
+    cmd.toUpperCase();
+    if (cmd.length() > 0) handleCommand(cmd);
+  }
+
+  if (millis() - lastReport >= 3000) {
+    lastReport = millis();
+    int hum = readHumidity();
+    if (autoMode) {
+      if (hum < thrMin && !pumpOn) setPump(true);
+      if (hum >= thrMax && pumpOn) setPump(false);
+    }
+    sendStatus(hum);
+  }
+}
+
+int readHumidity() {
+  long sum = 0;
+  for (int i = 0; i < 8; i++) { sum += analogRead(PIN_SENSOR); delay(5); }
+  return constrain(map((int)(sum/8), 3200, 800, 0, 100), 0, 100);
+}
+
+void setPump(bool on) {
+  pumpOn = on;
+  digitalWrite(PIN_RELAY, on ? LOW : HIGH);
+}
+
+void sendStatus(int hum) {
+  Serial1.print("{\"h\":"); Serial1.print(hum);
+  Serial1.print(",\"p\":"); Serial1.print(pumpOn ? 1 : 0);
+  Serial1.print(",\"m\":\""); Serial1.print(autoMode ? "AUTO" : "MANUAL");
+  Serial1.print("\",\"tMin\":"); Serial1.print(thrMin);
+  Serial1.print(",\"tMax\":"); Serial1.print(thrMax);
+  Serial1.println("}");
+
+  Serial.print("Hum:"); Serial.print(hum);
+  Serial.print("% Bomba:"); Serial.print(pumpOn ? "ON" : "OFF");
+  Serial.print(" Modo:"); Serial.println(autoMode ? "AUTO" : "MANUAL");
+}
+
+void handleCommand(const String& cmd) {
+  int hum = readHumidity();
+  if (cmd == "ON")     { autoMode = false; setPump(true);  }
+  else if (cmd == "OFF" || cmd == "MANUAL") { autoMode = false; setPump(false); }
+  else if (cmd == "STATUS") { }
+  else if (cmd.startsWith("AUTO:")) {
+    String p = cmd.substring(5);
+    int sep  = p.indexOf(':');
+    if (sep > 0) {
+      thrMin = constrain(p.substring(0, sep).toInt(), 0, 98);
+      thrMax = constrain(p.substring(sep+1).toInt(), 1, 100);
+      if (thrMin >= thrMax) thrMax = thrMin + 1;
+    }
+    autoMode = true;
+  }
+  sendStatus(hum);
+}
