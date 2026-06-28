@@ -35,7 +35,7 @@ Repositorio del grupo X para el proyecto del ramo *Proyecto Inicial (IWG400)* ‚Ä
 - Lenguaje(s) de programaci√≥n:
   - Ej: Python, C++
 - Microcontroladores
-  - Arduino UNO Q, ESP32
+  - Arduino UNO Q
 - Sensores
   - Higrometro FC-28
 - Sensores
