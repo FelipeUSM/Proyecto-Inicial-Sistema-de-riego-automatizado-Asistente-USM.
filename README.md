@@ -37,10 +37,10 @@ Repositorio del grupo X para el proyecto del ramo *Proyecto Inicial (IWG400)* �
 - Microcontroladores
   - Arduino UNO Q, ESP32
 - Sensores
- -Higrometro FC-28
+ - Higrometro FC-28
 - Componentes Electronicos
- -Jumpers
- -Módulo Relé 1ch 5v Disparo H L
+ - Jumpers
+ - Módulo Relé 1ch 5v Disparo H L
 ---
 
 ## 🚀 Instrucciones de Instalacion y Uso
