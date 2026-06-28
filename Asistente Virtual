@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Asistente USM</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #10141a;
+      color: #eef1f5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 20px 18px 14px;
+      border-bottom: 1px solid #2c3543;
+    }
+
+    .brand-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ff6b35;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .brand-name {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .clock {
+      font-size: 13px;
+      color: #8b96a5;
+    }
+
+    main {
+      flex: 1;
+      padding: 16px 16px 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .view { display: none; }
+    .view.active { display: flex; flex-direction: column; gap: 16px; }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8b96a5;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .empty-card {
+      background: #1a2029;
+      border: 1px dashed #2c3543;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 13px;
+      color: #8b96a5;
+      line-height: 1.5;
+    }
+
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-width: 480px;
+      margin: 0 auto;
+      display: flex;
+      background: #1a2029;
+      border-top: 1px solid #2c3543;
+      padding: 8px 0;
+    }
+
+    .nav-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      color: #8b96a5;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 10px 0;
+      position: relative;
+      font-family: inherit;
+    }
+
+    .nav-btn.active { color: #ff6b35; }
+
+    .nav-btn.active::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      width: 24px;
+      height: 3px;
+      border-radius: 2px;
+      background: #ff6b35;
+    }
+
+    .fab {
+      position: fixed;
+      bottom: 78px;
+      right: calc(50% - 240px + 18px);
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #ff6b35;
+      border: none;
+      color: #10141a;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(255,107,53,0.35);
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+
+    <header>
+      <div>
+        <div class="brand-eyebrow">USM</div>
+        <div class="brand-name">Asistente USM</div>
+      </div>
+      <div class="clock" id="clock"></div>
+    </header>
+
+    <main>
+
+      <div class="view active" id="view-home">
+        <div class="section-label">Próxima clase</div>
+        <div class="empty-card">No tienes clases agendadas. Agrega tu horario en la pestaña Horario.</div>
+
+        <div class="section-label">Próximo</div>
+        <div class="empty-card">Sin evaluaciones próximas. Agrega una en la pestaña Evaluaciones.</div>
+      </div>
+
+      <div class="view" id="view-schedule">
+        <div class="section-label">Horario semanal</div>
+        <div class="empty-card">No hay clases registradas. Toca el botón + para agregar una.</div>
+      </div>
+
+      <div class="view" id="view-evals">
+        <div class="section-label">Controles y certámenes</div>
+        <div class="empty-card">No tienes evaluaciones registradas. Toca el botón + para agregar una.</div>
+      </div>
+
+      <div class="view" id="view-study">
+        <div class="section-label">Sesiones de estudio</div>
+        <div class="empty-card">No tienes sesiones de estudio. Toca el botón + para agregar una.</div>
+      </div>
+
+    </main>
+
+    <nav>
+      <button class="nav-btn active" onclick="setView('home', this)">Ahora</button>
+      <button class="nav-btn" onclick="setView('schedule', this)">Horario</button>
+      <button class="nav-btn" onclick="setView('evals', this)">Evaluaciones</button>
+      <button class="nav-btn" onclick="setView('study', this)">Estudio</button>
+    </nav>
+
+    <button class="fab">+</button>
+
+  </div>
+
+  <script>
+    function setView(name, btn) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('view-' + name).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const days = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('clock').textContent = days[now.getDay()] + ' · ' + h + ':' + m;
+    }
+
+    updateClock();
+    setInterval(updateClock, 30000);
+  </script>
+
+</body>
+</html>
