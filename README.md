@@ -55,7 +55,7 @@ Repositorio del grupo X para el proyecto del ramo *Proyecto Inicial (IWG400)* ‚Ä
 ---
 
 ## üìê Dise√±o del Sistema
-![Diagrama de Conexiones](./assets/diagrama_conexiones.png)
+![Diagrama de Conexiones](https://imgur.com/a/conexiones-sCZNOZ8)
 
 *Explicacion grafica de como es la conexion entre el microcontrolador y los sensores*
 
@@ -63,7 +63,7 @@ Repositorio del grupo X para el proyecto del ramo *Proyecto Inicial (IWG400)* ‚Ä
 
 ## üìÖ Cronograma de trabajo
 
-[Carta Gantt](https://google.com)
+[Carta Gantt](https://imgur.com/a/carta-gantt-Nl4POQl)
 
 ---
 
