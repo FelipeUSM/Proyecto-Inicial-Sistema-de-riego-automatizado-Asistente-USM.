@@ -38,9 +38,11 @@ Repositorio del grupo X para el proyecto del ramo *Proyecto Inicial (IWG400)* �
   - Arduino UNO Q
 - Sensores
   - Higrometro FC-28
-- Sensores
+- Electronicos
   - Módulo Relé 1ch 5v Disparo
     - Jumpers
+    - Protoboard
+    - Bomba de Agua Sumergible Pequeña
 ---
 
 ## 🚀 Instrucciones de Instalacion y Uso
