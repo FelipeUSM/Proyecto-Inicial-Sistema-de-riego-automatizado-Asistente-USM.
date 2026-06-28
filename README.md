@@ -7,7 +7,7 @@ Repositorio del grupo X para el proyecto del ramo *Proyecto Inicial (IWG400)* �
 | Nombre y Apellido | Usuario GitHub | Correo USM               | Rol USM      |
 | ----------------- | -------------- | ------------------------ | ------------ |
 | Felipe Barra      |  @FelipeUSM    | fbarraf@usm.cl           | 202630003-k  |
-| Nombre2 Apellido2 | @usuario2      | nombre2.apellido2@usm.cl | 200000000000 |
+| José Norambuena   | @JNacho05      | jnorambuena@usm.cl       | 202630041-2  |
 
 ## 📝 Descripción de los proyectos
 
