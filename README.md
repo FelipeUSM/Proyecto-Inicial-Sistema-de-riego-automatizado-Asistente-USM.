@@ -39,8 +39,8 @@ Repositorio del grupo X para el proyecto del ramo *Proyecto Inicial (IWG400)* �
 - Sensores
   - Higrometro FC-28
 - Sensores
- - Módulo Relé 1ch 5v Disparo
- - Jumpers
+  - Módulo Relé 1ch 5v Disparo
+    - Jumpers
 ---
 
 ## 🚀 Instrucciones de Instalacion y Uso
